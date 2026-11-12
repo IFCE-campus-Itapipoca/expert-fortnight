@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+
+<form method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+    <input type="file" name="arquivo">
+    <button type="submit">Enviar</button>
+</form>
+
+
+<h1>Arquivos upados</h1>
+<ul>
+    {% for a in arquivos %}
+        <li>
+            <a href="{{ url_for('download', id=a.id )}}">
+                {{ a.nome_original }}
+            </a>
+            <form method="post" action="{{ url_for('apagar', id=a.id) }}" style="display:inline">
+                <button type="submit">Apagar</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
